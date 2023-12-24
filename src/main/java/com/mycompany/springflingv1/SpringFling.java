@@ -8,6 +8,13 @@ public class SpringFling {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //Working Velocities
+        double possibleVelocity1 = 0;
+        double possibleVelocity2 = 0;
+        double possibleVelocity3 = 0;
+        double possibleVelocity4 = 0;
+        double possibleVelocity5 = 0;
+        int solutions = 0;
         //Starting Launch Speed [FWD]
         double launchSpeed = 3;
         boolean launchSpeedFound = false;
@@ -37,10 +44,10 @@ public class SpringFling {
         //Calulates The Springs Starting Height
         double rampHeight = Math.sin(Math.toRadians(launchAngle))*0.612;
         double springInitialHeight = rampHeight + 1.081 + 0.087;
-        System.out.println(springInitialHeight);
+        System.out.println("The Springs Intital Height = " + springInitialHeight);
         
         //Calculates The Trajectory of The Spring on Both Axis
-        System.out.println("TrajectoryBeingCalculated");
+        System.out.println("Trajectory Being Calculated");
         while(launchSpeedFound == false)
         {
             launchSpeed += 0.01;
@@ -79,23 +86,47 @@ public class SpringFling {
                 //For Testing Purposes
                 System.out.println(horizontalDistance + " " + verticalDistance);
                 //System.out.println(launchSpeed);
-                
+                //Finds Working Velocities
                 if((horizontalDistance >= distanceToBucket - 0.05 && horizontalDistance <= distanceToBucket + 0.05) && (verticalDistance >= 0 - 0.05 && verticalDistance <= 0 + 0.05))
                 {
-                    launchSpeedFound = true;
+                    ++solutions;
+                    if(solutions == 1)
+                    {
+                        possibleVelocity1 = launchSpeed;
+                    }
+                    else if(solutions == 2)
+                    {
+                        possibleVelocity2 = launchSpeed;
+                    }
+                    else if(solutions == 3)
+                    {
+                        possibleVelocity3 = launchSpeed;
+                    }
+                    else if(solutions == 7)
+                    {
+                        possibleVelocity4 = launchSpeed;
+                    }
+                    else if(solutions == 10)
+                    {
+                        possibleVelocity5 = launchSpeed;
+                        launchSpeedFound = true;
+                    }
+                    else if(launchSpeed >= 30)
+                    {
+                        launchSpeedFound = true;
+                    }
                     time = 500;
                 }
                 //Limits Runs
-//                if(verticalDistance < - 25 || horizontalDistance < -25)
-//                {
-//                    time = 500;
-//                    System.out.println(pastTime);
-//                }
+                if(verticalDistance < - 1 || horizontalDistance < - 1)
+                {
+                    time = 500;
+                }
             }
             System.out.println("\n\n\n\n");
         }
         //Give The Good Velocity To Start With
-        System.out.println("Working Starting Launch Speed " + launchSpeed);
+        System.out.println("Working Starting Launch Speeds " + possibleVelocity1 + ", " + possibleVelocity2 + ", " + possibleVelocity3 + ", " + possibleVelocity4 + ", " + possibleVelocity5);
         System.out.println("\n" + horizontalDistance + " " + verticalDistance);
     }
     
