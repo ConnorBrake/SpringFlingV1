@@ -60,9 +60,9 @@ public class SpringFling {
             verticalVelocity = Math.sin(Math.toRadians(launchAngle))*launchSpeed;
             verticalAirResistance = -1*0.5*0.85*1.23*springCrossSectionalArea*Math.pow(verticalVelocity, 2);
             verticalDistance = springInitialHeight;
-            verticalAcceleration = (verticalAirResistance/springMass) - 9.807;
+            verticalAcceleration = (verticalAirResistance/springMass) + -9.807;
             
-            System.out.println(horizontalDistance + " " + verticalDistance);
+            System.out.println(horizontalDistance + " -" + verticalDistance + " ");
             
             for(double time = 0; time < 3.50; time += 0.01)
             {
@@ -71,20 +71,22 @@ public class SpringFling {
                 horizontalAirResistance = -1*0.5*0.85*1.23*springCrossSectionalArea*Math.pow(horizontalVelocity, 2);
                 horizontalAcceleration = horizontalAirResistance/springMass;
                 
-                verticalDistance = verticalDistance + (verticalVelocity*(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)));
-                verticalVelocity = (verticalAcceleration*(0.01)) + verticalVelocity;
-                //Changing Air Resistance Direction
-                if(((verticalDistance + (verticalVelocity*(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)))) - verticalDistance) > verticalDistance)
+                //Changing Air Resistance Direction based on if the spring is falling or not
+                if(((verticalDistance + (verticalVelocity *(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)))) - verticalDistance) < 0)
                 {
                     verticalAirResistance = 1*0.5*0.85*1.23*springCrossSectionalArea*Math.pow(verticalVelocity, 2);
+                    //System.out.println("Changed Force! " + verticalAirResistance);
                 }
                 else
                 {
                     verticalAirResistance = -1*0.5*0.85*1.23*springCrossSectionalArea*Math.pow(verticalVelocity, 2);
+                    //System.out.println("Not Changed Force! " + verticalAirResistance);
                 }
-                verticalAcceleration = (verticalAirResistance/springMass) - 9.807;
+                verticalDistance = verticalDistance + (verticalVelocity*(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)));
+                verticalVelocity = (verticalAcceleration*(0.01)) + verticalVelocity;
+                verticalAcceleration = (verticalAirResistance/springMass) + -9.807;
                 //For Testing Purposes
-                System.out.println(horizontalDistance + " " + verticalDistance);
+                System.out.println(horizontalDistance + " -" + verticalDistance + " ");
                 //System.out.println(launchSpeed);
                 //Finds Working Velocities
                 if((horizontalDistance >= distanceToBucket - 0.05 && horizontalDistance <= distanceToBucket + 0.05) && (verticalDistance >= 0 - 0.05 && verticalDistance <= 0 + 0.05))
