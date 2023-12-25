@@ -32,17 +32,17 @@ public class SpringFling {
         Scanner input = new Scanner(System.in); 
         System.out.println("Input The Launch Angle");
         double launchAngle = input.nextDouble();
-        System.out.println("Input The X Distance To The Bucket");
+        System.out.println("Input The X Distance To The Bucket (m)");
         double distanceToBucket = input.nextDouble();
-        System.out.println("Input The Cross Sectional Area of Your Spring");
+        System.out.println("Input The Cross Sectional Area of Your Spring (m)");
         double springCrossSectionalArea = input.nextDouble();
-        System.out.println("Input The Mass of Your Spring");
+        System.out.println("Input The Mass of Your Spring (kg)");
         double springMass = input.nextDouble();
         
         //Calulates The Springs Starting Height
         double rampHeight = Math.sin(Math.toRadians(launchAngle))*0.612;
         double springInitialHeight = rampHeight + 1.081 + 0.087;
-        System.out.println("The Springs Intital Height = " + springInitialHeight);
+        System.out.println("The Springs Intital Height (m) = " + springInitialHeight);
         
         //Calculates The Trajectory of The Spring on Both Axis
         System.out.println("Trajectory Being Calculated");
@@ -129,18 +129,18 @@ public class SpringFling {
             System.out.println("\n\n\n\n");
         }
         //Give The Good Velocity To Start With
-        System.out.println("Working Starting Launch Speeds " + possibleVelocity1 + ", " + possibleVelocity2 + ", " + possibleVelocity3 + ", " + possibleVelocity4 + ", " + possibleVelocity5);
+        System.out.println("Working Starting Launch Speeds (m/s) " + possibleVelocity1 + ", " + possibleVelocity2 + ", " + possibleVelocity3 + ", " + possibleVelocity4 + ", " + possibleVelocity5);
         System.out.println("\nFinal Working Distance (m) Horizontal: " + horizontalDistance + " Vertical: " + verticalDistance);
         System.out.println("\n\n\n\n");
         //Extension of Spring
-        System.out.println("Input The Spring Constant of Your Spring");
+        System.out.println("Input The Spring Constant of Your Spring (N/Kg)");
         double springConstant = input.nextDouble();
         System.out.println("Input The Spring Efficiency of Your Spring (In Decimal (eg. 96% = 0.96))");
         double springEfficiency = input.nextDouble();
-        System.out.println("Outputting Average Needed Spring Exstenion");
+        System.out.println("Outputting Average Needed Spring Extension");
         //Calculating The Exstension of The Spring
         double averageWorkingLaunchSpeeds = (possibleVelocity1 + possibleVelocity2 + possibleVelocity3 + possibleVelocity4 + possibleVelocity5) / 5;
         double avgSpringExstension = Math.sqrt((springMass * (Math.pow(averageWorkingLaunchSpeeds, 2))) / (springConstant * springEfficiency));
-        System.out.println("The Average Needed Spring Exstenion = " + avgSpringExstension);
+        System.out.println("The Average Needed Spring Extension = " + avgSpringExstension);
     }
 }
