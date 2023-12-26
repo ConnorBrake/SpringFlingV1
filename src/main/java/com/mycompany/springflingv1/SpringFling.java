@@ -74,7 +74,7 @@ public class SpringFling {
                 verticalDistance = verticalDistance + (verticalVelocity*(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)));
                 verticalVelocity = (verticalAcceleration *(0.01)) + verticalVelocity;
                 //Changing Air Resistance Direction based on if the spring is falling or not
-                if(((verticalDistance + (verticalVelocity*(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)))) - verticalDistance) < 0)
+                if((Math.toDegrees(Math.atan(verticalVelocity/horizontalVelocity))) < 0)
                 {
                     verticalAirResistance = 0.5*0.85*1.23*springCrossSectionalArea*(Math.pow(verticalVelocity, 2));
                     //System.out.println("Changed Force! " + verticalAirResistance);
