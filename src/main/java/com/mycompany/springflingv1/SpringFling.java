@@ -60,20 +60,18 @@ public class SpringFling {
             verticalDistance = springInitialHeight;
             verticalAcceleration = (verticalAirResistance/springMass) + -9.807;
             
-            System.out.println(horizontalDistance + " -" + verticalDistance + " ");
+            //System.out.println(horizontalDistance + " -" + verticalDistance + " ");
             
             for(double time = 0; time < 3.50; time += 0.01)
             {
-                double degree = Math.toDegrees(Math.atan(verticalVelocity/horizontalVelocity));
+                //double degree = Math.toDegrees(Math.atan(verticalVelocity/horizontalVelocity));
                 horizontalDistance = horizontalDistance + (horizontalVelocity*(0.01)) + (0.5*horizontalAcceleration*(Math.pow((0.01), 2)));
                 horizontalVelocity = horizontalVelocity + (horizontalAcceleration * (0.01));
                 horizontalAirResistance = -1*0.5*0.85*1.23*springCrossSectionalArea*(Math.pow(horizontalVelocity, 2));
                 horizontalAcceleration = (horizontalAirResistance/springMass);
                 
-                verticalDistance = verticalDistance + (verticalVelocity*(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)));
-                verticalVelocity = (verticalAcceleration *(0.01)) + verticalVelocity;
                 //Changing Air Resistance Direction based on if the spring is falling or not
-                if((degree - (Math.abs((Math.toDegrees(Math.atan(verticalVelocity/horizontalVelocity)))))) < 0)
+                if(((verticalDistance + (verticalVelocity*(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)))) - verticalDistance) < 0)
                 {
                     verticalAirResistance = 0.5*0.85*1.23*springCrossSectionalArea*(Math.pow(verticalVelocity, 2));
                     //System.out.println("Changed Force! " + verticalAirResistance);
@@ -83,50 +81,51 @@ public class SpringFling {
                     verticalAirResistance = -1*0.5*0.85*1.23*springCrossSectionalArea*(Math.pow(verticalVelocity, 2));
                     //System.out.println("Not Changed Force! " + verticalAirResistance);
                 }
+                verticalDistance = verticalDistance + (verticalVelocity*(0.01)) + (0.5*verticalAcceleration*(Math.pow((0.01), 2)));
+                verticalVelocity = (verticalAcceleration *(0.01)) + verticalVelocity;
                 verticalAcceleration = (verticalAirResistance/springMass) + -9.807;
                 //System.out.println(verticalAcceleration);
                 //System.out.println(horizontalAcceleration);
                 //For Testing Purposes
-                System.out.println(horizontalDistance + " -" + verticalDistance + " ");
+                //System.out.println(horizontalDistance + " -" + verticalDistance + " ");
                 //System.out.println(launchSpeed);
                 //Finds Working Velocities
                 if((horizontalDistance >= distanceToBucket - 0.05 && horizontalDistance <= distanceToBucket + 0.05) && (verticalDistance >= 0 - 0.05 && verticalDistance <= 0 + 0.05))
                 {
                     ++solutions;
-                    if(solutions == 1)
-                    {
-                        possibleVelocity1 = launchSpeed;
-                    }
-                    else if(solutions == 2)
-                    {
-                        possibleVelocity2 = launchSpeed;
-                    }
-                    else if(solutions == 3)
-                    {
-                        possibleVelocity3 = launchSpeed;
-                    }
-                    else if(solutions == 7)
-                    {
-                        possibleVelocity4 = launchSpeed;
-                    }
-                    else if(solutions == 10)
-                    {
-                        possibleVelocity5 = launchSpeed;
-                        launchSpeedFound = true;
+                    switch (solutions) {
+                        case 1:
+                            possibleVelocity1 = launchSpeed;
+                            break;
+                        case 2:
+                            possibleVelocity2 = launchSpeed;
+                            break;
+                        case 3:
+                            possibleVelocity3 = launchSpeed;
+                            break;
+                        case 7:
+                            possibleVelocity4 = launchSpeed;
+                            break;
+                        case 10:
+                            possibleVelocity5 = launchSpeed;
+                            launchSpeedFound = true;
+                            break;
+                        default:
+                            break;
                     }
                     time = 500;
                 }
                 //Limits Runs
-                if(verticalDistance < - 1 || horizontalDistance > distanceToBucket + 1)
-                {
-                    time = 500;
-                }
-                else if(launchSpeed >= 25)
-                {
-                    launchSpeedFound = true;
-                }
+//                if(verticalDistance < - 1 || horizontalDistance > distanceToBucket + 1)
+//                {
+//                    time = 500;
+//                }
+//                else if(launchSpeed >= 25)
+//                {
+//                    launchSpeedFound = true;
+//                }
             }
-            System.out.println("\n\n\n\n");
+            //System.out.println("\n\n\n\n");
         }
         //Give The Good Velocity To Start With
         System.out.println("Working Starting Launch Speeds (m/s) " + possibleVelocity1 + ", " + possibleVelocity2 + ", " + possibleVelocity3 + ", " + possibleVelocity4 + ", " + possibleVelocity5);
@@ -137,10 +136,10 @@ public class SpringFling {
         double springConstant = input.nextDouble();
         System.out.println("Input The Spring Efficiency of Your Spring (In Decimal (eg. 96% = 0.96))");
         double springEfficiency = input.nextDouble();
-        System.out.println("Outputting Average Needed Spring Extension");
+        System.out.println("Outputting Average Needed Spring Extension (m)");
         //Calculating The Exstension of The Spring
         double averageWorkingLaunchSpeeds = (possibleVelocity1 + possibleVelocity2 + possibleVelocity3 + possibleVelocity4 + possibleVelocity5) / 5;
         double avgSpringExstension = Math.sqrt((springMass * (Math.pow(averageWorkingLaunchSpeeds, 2))) / (springConstant * springEfficiency));
-        System.out.println("The Average Needed Spring Extension = " + avgSpringExstension);
+        System.out.println("The Average Needed Spring Extension (m) = " + avgSpringExstension);
     }
 }
