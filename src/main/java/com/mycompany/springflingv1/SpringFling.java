@@ -63,7 +63,7 @@ public class SpringFling {
             
             //System.out.println(horizontalDistance + " -" + verticalDistance + " ");
             
-            for(double time = 0; time < 3.50; time += 0.01)
+            for(double time = 0.01; time < 3.50; time += 0.01)
             {
                 //double degree = Math.toDegrees(Math.atan(verticalVelocity/horizontalVelocity));
                 horizontalDistance = horizontalDistance + (horizontalVelocity*(0.01)) + (0.5*horizontalAcceleration*(Math.pow((0.01), 2)));
@@ -139,7 +139,7 @@ public class SpringFling {
         System.out.println("Input The Spring Efficiency of Your Spring (In Decimal (eg. 96% = 0.96))");
         double springEfficiency = input.nextDouble();
         System.out.println("Outputting Average Needed Spring Extension (m)");
-        //Calculating The Exstension of The Spring
+        //Calculating The Extension of The Spring
         double averageWorkingLaunchSpeeds = (possibleVelocity1 + possibleVelocity2 + possibleVelocity3 + possibleVelocity4 + possibleVelocity5) / 5;
         double avgSpringExstension = Math.sqrt((springMass * (Math.pow(averageWorkingLaunchSpeeds, 2))) / (springConstant * springEfficiency));
         System.out.println("The Average Needed Spring Extension (m) = " + avgSpringExstension);
