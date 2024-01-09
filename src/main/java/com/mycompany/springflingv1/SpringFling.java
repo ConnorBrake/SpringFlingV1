@@ -32,6 +32,8 @@ public class SpringFling {
         Scanner input = new Scanner(System.in); 
         System.out.println("Input The Launch Angle");
         double launchAngle = input.nextDouble();
+        System.out.println("Input Bumper Height (m)");
+        double bumperHeight = input.nextDouble();
         System.out.println("Input The X Distance To The Bucket (m)");
         double distanceToBucket = input.nextDouble();
         System.out.println("Input The Cross Sectional Area of Your Spring (m^2)");
@@ -41,7 +43,7 @@ public class SpringFling {
         
         //Calulates The Springs Starting Height
         double rampHeight = (Math.sin(Math.toRadians(launchAngle)))*0.612;
-        double springInitialHeight = rampHeight + 1.081 + 0.087;
+        double springInitialHeight = rampHeight + 1.081 + bumperHeight;
         System.out.println("The Springs Intital Height (m) = " + springInitialHeight);
         
         //Calculates The Trajectory of The Spring on Both Axis
@@ -141,7 +143,7 @@ public class SpringFling {
         System.out.println("Outputting Average Needed Spring Extension (m)");
         //Calculating The Extension of The Spring
         double averageWorkingLaunchSpeeds = (possibleVelocity1 + possibleVelocity2 + possibleVelocity3 + possibleVelocity4 + possibleVelocity5) / 5;
-        double avgSpringExstension = Math.sqrt((springMass * (Math.pow(averageWorkingLaunchSpeeds, 2))) / (springConstant * springEfficiency));
+        double avgSpringExstension = Math.sqrt((springMass * (Math.pow(averageWorkingLaunchSpeeds, 2))) / (springConstant * springEfficiency * 2));
         System.out.println("The Average Needed Spring Extension (m) = " + avgSpringExstension);
     }
 }
