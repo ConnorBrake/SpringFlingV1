@@ -4,9 +4,6 @@ import java.lang.Math;
 
 public class SpringFling {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         //Working Velocities
         double possibleVelocity1 = 0;
@@ -59,15 +56,11 @@ public class SpringFling {
             
             verticalVelocity = (Math.sin(Math.toRadians(launchAngle)))*launchSpeed;
             verticalAirResistance = -1*0.5*0.85*1.23*springCrossSectionalArea*(Math.pow(verticalVelocity, 2));
-            //System.out.println("Changed Force! " + verticalAirResistance);
             verticalDistance = springInitialHeight;
             verticalAcceleration = (verticalAirResistance/springMass) + -9.807;
             
-            //System.out.println(horizontalDistance + " -" + verticalDistance + " ");
-            
             for(double time = 0.01; time < 3.50; time += 0.01)
             {
-                //double degree = Math.toDegrees(Math.atan(verticalVelocity/horizontalVelocity));
                 horizontalDistance = horizontalDistance + (horizontalVelocity*(0.01)) + (0.5*horizontalAcceleration*(Math.pow((0.01), 2)));
                 horizontalVelocity = horizontalVelocity + (horizontalAcceleration * (0.01));
                 horizontalAirResistance = -1*0.5*0.85*1.23*springCrossSectionalArea*(Math.pow(horizontalVelocity, 2));
@@ -79,20 +72,12 @@ public class SpringFling {
                 if((Math.toDegrees(Math.atan(verticalVelocity/horizontalVelocity))) <= 0)
                 {
                     verticalAirResistance = 0.5*0.85*1.23*springCrossSectionalArea*(Math.pow(verticalVelocity, 2));
-                    //System.out.println("Changed Force! " + verticalAirResistance);
                 }
                 else
                 {
                     verticalAirResistance = -1*0.5*0.85*1.23*springCrossSectionalArea*(Math.pow(verticalVelocity, 2));
-                    //System.out.println("Not Changed Force! " + verticalAirResistance);
                 }
                 verticalAcceleration = (verticalAirResistance/springMass) + -9.807;
-                //System.out.println(verticalAcceleration);
-                //System.out.println(horizontalAcceleration);
-                //For Testing Purposes
-                //System.out.println(horizontalDistance + " -" + verticalDistance + " ");
-                //System.out.println(launchSpeed);
-                //Finds Working Velocities
                 if((horizontalDistance >= distanceToBucket - 0.05 && horizontalDistance <= distanceToBucket + 0.05) && (verticalDistance >= 0 - 0.05 && verticalDistance <= 0 + 0.05))
                 {
                     ++solutions;
@@ -118,20 +103,9 @@ public class SpringFling {
                     }
                     time = 500;
                 }
-                //Limits Runs
-//                if(verticalDistance < - 1 || horizontalDistance > distanceToBucket + 1)
-//                {
-//                    time = 500;
-//                }
-//                else if(launchSpeed >= 25)
-//                {
-//                    launchSpeedFound = true;
-//                }
             }
-            //System.out.println("\n\n\n\n");
         }
-        //Give The Good Velocity To Start With
-            //*Look at frictional energy (the frictional coifficent of smooth pine wood is 0.3 to 0.5)
+        //Give The Good Average Velocity To Start Energy Calculations With
         System.out.println("Working Starting Launch Speeds (m/s) " + possibleVelocity1 + ", " + possibleVelocity2 + ", " + possibleVelocity3 + ", " + possibleVelocity4 + ", " + possibleVelocity5);
         System.out.println("\nFinal Working Distance (m) Horizontal: " + horizontalDistance + " Vertical: " + verticalDistance);
         System.out.println("\n\n\n\n");
